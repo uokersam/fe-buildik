@@ -89,10 +89,6 @@ module.exports = {
                                     progressive: true,
                                     arithmetic: false
                                 }),
-                                require('imagemin-pngquant')({
-                                    floyd: 0.5,
-                                    speed: 2
-                                }),
                                 require('imagemin-svgo')({
                                     plugins: [
                                         { removeTitle: true },
