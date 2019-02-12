@@ -1,0 +1,39 @@
+.btn-main {
+  display: flex;
+  border-radius: 52px;
+  line-height: 21px;
+  font-weight: 500;
+  justify-content: center;
+  font-size: 18px;
+  padding: 17px 30px 19px;
+  border: none;
+  transition: all ease-in-out .2s;
+  cursor: pointer;
+
+  &--simple {
+
+    background-color: #514CC2;
+    color: #fff;
+
+    &:hover {
+      opacity: 0.8;
+      border-radius: 52px;
+      background-color: #514CC2;
+    }
+
+    &:active {
+
+    }
+  }
+
+  &--gradient {
+    background-color: #FFFFFF;
+    color: #514CC2;
+  }
+
+  &--bg {
+
+  }
+}
+
+
