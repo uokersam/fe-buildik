@@ -9,3 +9,5 @@ $npm run start
 
 ### Билд проекта для продакшна
 $npm run build
+
+//todo doesn't work correctly. fix the packages
