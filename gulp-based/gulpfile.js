@@ -6,7 +6,6 @@ const gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     notify = require('gulp-notify'),
     csso = require('gulp-csso'),
-    cssbeautify = require('gulp-cssbeautify'),
     pug = require('gulp-pug');
 
 gulp.task('browser-sync', function() {
@@ -34,11 +33,6 @@ gulp.task('styles', function() {
       pipe(autoprefixer(['last 4 versions'])).
       pipe(csso({
         comments: false,
-      })).
-      pipe(cssbeautify({
-        indent: '  ',
-        openbrace: 'separate-line',
-        autosemicolon: true,
       })).
       pipe(gulp.dest('public/css')).
       pipe(browserSync.stream());
