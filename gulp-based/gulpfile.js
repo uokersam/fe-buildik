@@ -12,7 +12,7 @@ const gulp = require('gulp'),
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-      baseDir: 'app/dist',
+      baseDir: 'public',
     },
     notify: false,
     // open: false,
@@ -24,11 +24,11 @@ gulp.task('browser-sync', function() {
 gulp.task('pug', function() {
   return gulp.src('app/**/*.pug').pipe(pug({
     pretty: true,
-  })).pipe(gulp.dest('app/dist'));
+  })).pipe(gulp.dest('public'));
 });
 
 gulp.task('styles', function() {
-  return gulp.src('app/scss/**/*.scss').
+  return gulp.src('app/sass/**/*.sass').
       pipe(sass({outputStyle: 'expanded'}).on('error', notify.onError())).
       pipe(rename({suffix: '.min', prefix: ''})).
       pipe(autoprefixer(['last 4 versions'])).
@@ -40,7 +40,7 @@ gulp.task('styles', function() {
         openbrace: 'separate-line',
         autosemicolon: true,
       })).
-      pipe(gulp.dest('app/dist/css')).
+      pipe(gulp.dest('public/css')).
       pipe(browserSync.stream());
 });
 
@@ -49,16 +49,32 @@ gulp.task('scripts', function() {
     'app/js/common.js', // Always at the end
   ]).
       pipe(concat('scripts.min.js')).
-      pipe(gulp.dest('app/dist/js')).
+      pipe(gulp.dest('public')).
       pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('code', function() {
-  return gulp.src('app/dist/**/*.html').pipe(browserSync.reload({stream: true}));
+  return gulp.src('public/**/*.html').
+      pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task('img', function() {
+  return gulp.src('app/img/**/*.*').
+      pipe(gulp.dest('public/img'));
+});
+
+gulp.task('fonts', function() {
+  return gulp.src('app/fonts/**/*.*').
+      pipe(gulp.dest('public/fonts'));
+});
+
+gulp.task('files', function() {
+  return gulp.src('app/other/**/*.*').
+      pipe(gulp.dest('public/'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('app/scss/**/*.scss',
+  gulp.watch('app/sass/**/*.sass',
       gulp.parallel('styles'));
   gulp.watch(['libs/**/*.js', 'app/js/common.js'], gulp.parallel('scripts'));
   gulp.watch('app/**/*.pug', gulp.parallel('code', 'pug'));
@@ -66,4 +82,9 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default',
-    gulp.parallel('styles', 'scripts', 'pug', 'browser-sync', 'watch'));
+    gulp.parallel('styles', 'scripts', 'pug', 'img', 'fonts', 'files',
+        'browser-sync',
+        'watch'));
+
+gulp.task('prod',
+    gulp.parallel('styles', 'scripts', 'pug', 'img', 'fonts', 'files'));
