@@ -6,7 +6,7 @@ const gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     notify = require('gulp-notify'),
     csso = require('gulp-csso'),
-    pug = require('gulp-pug'),
+    twig = require('gulp-twig'),
     data = require('gulp-data'),
     fs = require('fs');
 
@@ -22,10 +22,13 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('pug', function() {
-  return gulp.src('app/**/*.pug').pipe(pug({
-    pretty: true,
-  })).pipe(gulp.dest('public'));
+gulp.task('twig', function() {
+  return gulp.src('app/**/*.twig').
+      pipe(data(function(file) {
+        return JSON.parse(fs.readFileSync('./app/parameters.json'));
+      })).
+      pipe(twig()).
+      pipe(gulp.dest('public'));
 });
 
 gulp.task('styles', function() {
@@ -73,14 +76,16 @@ gulp.task('watch', function() {
   gulp.watch('app/sass/**/*.sass',
       gulp.parallel('styles'));
   gulp.watch(['libs/**/*.js', 'app/js/common.js'], gulp.parallel('scripts'));
-  gulp.watch('app/**/*.pug', gulp.parallel('code', 'pug'));
-  gulp.watch('app/service/**/*.css', gulp.parallel('code', 'pug'));
+  gulp.watch('app/**/*.twig', gulp.parallel('code', 'twig'));
+  gulp.watch('app/service/**/*.css', gulp.parallel('code', 'twig'));
+  gulp.watch('app/**/*.json', gulp.parallel('code', 'twig'));
 });
 
 gulp.task('default',
-    gulp.parallel('styles', 'scripts', 'pug', 'img', 'fonts', 'files',
+    gulp.parallel('styles', 'scripts', 'img', 'fonts', 'files', 'twig',
         'browser-sync',
         'watch'));
 
 gulp.task('prod',
-    gulp.parallel('styles', 'scripts', 'pug', 'img', 'fonts', 'files'));
+    gulp.parallel('styles', 'scripts', 'img', 'fonts', 'files',
+        'twig'));
