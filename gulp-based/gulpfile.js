@@ -7,7 +7,7 @@ const gulp = require('gulp'),
     notify = require('gulp-notify'),
     csso = require('gulp-csso'),
     pug = require('gulp-pug'),
-    data = require('gulp-date'),
+    data = require('gulp-data'),
     fs = require('fs');
 
 gulp.task('browser-sync', function() {
