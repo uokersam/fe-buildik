@@ -6,7 +6,9 @@ const gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     notify = require('gulp-notify'),
     csso = require('gulp-csso'),
-    pug = require('gulp-pug');
+    pug = require('gulp-pug'),
+    data = require('gulp-date'),
+    fs = require('fs');
 
 gulp.task('browser-sync', function() {
   browserSync({
