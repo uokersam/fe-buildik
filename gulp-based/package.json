@@ -4,7 +4,7 @@
   "description": "builded on gulp",
   "main": "index.js",
   "scripts": {
-    "run": "gulp"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "uokersam",
   "license": "ISC",
@@ -14,11 +14,14 @@
     "gulp-autoprefixer": "^6.0.0",
     "gulp-clean-css": "^4.0.0",
     "gulp-concat": "^2.6.1",
+    "gulp-cssbeautify": "^1.0.1",
     "gulp-csso": "^3.0.1",
     "gulp-data": "^1.3.1",
     "gulp-notify": "^3.2.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
-    "gulp-twig": "^1.2.0"
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-twig": "^1.2.0",
+    "vinyl-source-stream": "^2.0.0"
   }
 }
