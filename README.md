@@ -1,3 +1,2 @@
-# fuilder
-basic template for front-end projects building
-// todo remove bootstrap
+# Gulp-stencil
+Is a template tasks for typical front-end project
